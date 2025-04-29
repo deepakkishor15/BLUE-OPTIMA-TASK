@@ -1,0 +1,352 @@
+control@control:~$ python3 -m venv myenv
+
+control@control:~$
+control@control:~$ source myenv/bin/activate
+(myenv) control@control:~$ pip install boto3 pandas
+Collecting boto3
+  Downloading boto3-1.37.37-py3-none-any.whl.metadata (6.7 kB)
+Collecting pandas
+  Downloading pandas-2.2.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (89 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 89.9/89.9 kB 1.5 MB/s eta 0:00:00
+Collecting botocore<1.38.0,>=1.37.37 (from boto3)
+  Downloading botocore-1.37.37-py3-none-any.whl.metadata (5.7 kB)
+Collecting jmespath<2.0.0,>=0.7.1 (from boto3)
+  Downloading jmespath-1.0.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting s3transfer<0.12.0,>=0.11.0 (from boto3)
+  Downloading s3transfer-0.11.5-py3-none-any.whl.metadata (1.7 kB)
+Collecting numpy>=1.26.0 (from pandas)
+  Downloading numpy-2.2.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 1.9 MB/s eta 0:00:00
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas)
+  Downloading tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting urllib3!=2.2.0,<3,>=1.25.4 (from botocore<1.38.0,>=1.37.37->boto3)
+  Downloading urllib3-2.4.0-py3-none-any.whl.metadata (6.5 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Downloading boto3-1.37.37-py3-none-any.whl (139 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 139.9/139.9 kB 2.1 MB/s eta 0:00:00
+Downloading pandas-2.2.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.7/12.7 MB 1.4 MB/s eta 0:00:00
+Downloading botocore-1.37.37-py3-none-any.whl (13.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.5/13.5 MB 1.3 MB/s eta 0:00:00
+Downloading jmespath-1.0.1-py3-none-any.whl (20 kB)
+Downloading numpy-2.2.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.1/16.1 MB 909.9 kB/s eta 0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 483.8 kB/s eta 0:00:00
+Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 509.2/509.2 kB 743.9 kB/s eta 0:00:00
+Downloading s3transfer-0.11.5-py3-none-any.whl (84 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 84.8/84.8 kB 773.5 kB/s eta 0:00:00
+Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 347.8/347.8 kB 520.6 kB/s eta 0:00:00
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading urllib3-2.4.0-py3-none-any.whl (128 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 128.7/128.7 kB 896.7 kB/s eta 0:00:00
+Installing collected packages: pytz, urllib3, tzdata, six, numpy, jmespath, python-dateutil, pandas, botocore, s3transfer, boto3
+Successfully installed boto3-1.37.37 botocore-1.37.37 jmespath-1.0.1 numpy-2.2.5 pandas-2.2.3 python-dateutil-2.9.0.post0 pytz-2025.2 s3transfer-0.11.5 six-1.17.0 tzdata-2025.2 urllib3-2.4.0
+(myenv) control@control:~$
+
+(myenv) control@control:~$ python update_tags.py
+(myenv) control@control:~$ aws ec2 describe-instances --filters "Name=tag:Hostname,Values=webserver01" --query "Reservations[*].Instances[*].Tags" --region us-east-1
+[]
+(myenv) control@control:~$
+(myenv) control@control:~$ python update_tags.py
+(myenv) control@control:~$ aws ec2 describe-instances --filters "Name=tag:Hostname,Values=webserver01" --query "Reservations[*].Instances[*].Tags" --region us-east-1
+[]
+(myenv) control@control:~$ aws ec2 describe-instances --query "Reservations[*].Instances[*].[InstanceId,Placement.AvailabilityZone]" --region us-east-1
+[]
+(myenv) control@control:~$ aws ec2 describe-tags --region us-east-1 --query "Tags[?Key=='Hostname']"
+[]
+(myenv) control@control:~$ aws ec2 describe-instances --region us-east-1 --query "Reservations[*].Instances[*].[InstanceId,Tags]"
+[]
+(myenv) control@control:~$ for region in $(aws ec2 describe-regions --query "Regions[*].RegionName" --output text); do
+>   echo "Checking $region..."
+>   aws ec2 describe-instances --region $region --query "Reservations[*].Instances[*].[InstanceId]" --output text
+> done
+
+Checking ap-south-1...
+Checking eu-north-1...
+Checking eu-west-3...
+Checking eu-west-2...
+Checking eu-west-1...
+Checking ap-northeast-3...
+Checking ap-northeast-2...
+Checking ap-northeast-1...
+Checking ca-central-1...
+Checking sa-east-1...
+Checking ap-southeast-1...
+Checking ap-southeast-2...
+Checking eu-central-1...
+(myenv) control@control:~$ aws sts get-caller-identity
+{
+    "UserId": "AIDA3C6FMEXR4CFXYRSRR",
+    "Account": "762233759203",
+    "Arn": "arn:aws:iam::762233759203:user/user"
+}
+(myenv) control@control:~$
+
+(myenv) control@control:~$ aws ec2 create-security-group --group-name your-security-group --description "Security group for EC2 instance"
+{
+    "GroupId": "sg-05744948085c0d155",
+    "SecurityGroupArn": "arn:aws:ec2:us-east-1:762233759203:security-group/sg-05744948085c0d155"
+}
+(myenv) control@control:~$
+(myenv) control@control:~$ aws ec2 create-key-pair --key-name my-key-name --query 'KeyMaterial' --output text > my-key-name.pem
+(myenv) control@control:~$ chmod 400 my-key-name.pem
+(myenv) control@control:~$
+(myenv) control@control:~$ aws ec2 create-security-group --group-name my-security-group --description "Security group for my EC2 instance"
+{
+    "GroupId": "sg-0d5276aa398190ee0",
+    "SecurityGroupArn": "arn:aws:ec2:us-east-1:762233759203:security-group/sg-0d5276aa398190ee0"
+}
+(myenv) control@control:~$
+(myenv) control@control:~$ aws ec2 create-security-group --group-name my-security-group --description "Security group for my EC2 instance"
+{
+    "GroupId": "sg-0d5276aa398190ee0",
+    "SecurityGroupArn": "arn:aws:ec2:us-east-1:762233759203:security-group/sg-0d5276aa398190ee0"
+}
+(myenv) control@control:~$ aws ec2 authorize-security-group-ingress --group-name my-security-group --protocol tcp --port 22 --cidr 0.0.0.0/0
+{
+    "Return": true,
+    "SecurityGroupRules": [
+        {
+            "SecurityGroupRuleId": "sgr-0220482682005f405",
+            "GroupId": "sg-0d5276aa398190ee0",
+            "GroupOwnerId": "762233759203",
+            "IsEgress": false,
+            "IpProtocol": "tcp",
+            "FromPort": 22,
+            "ToPort": 22,
+            "CidrIpv4": "0.0.0.0/0",
+            "SecurityGroupRuleArn": "arn:aws:ec2:us-east-1:762233759203:security-group-rule/sgr-0220482682005f405"
+        }
+    ]
+}
+(myenv) control@control:~$
+(myenv) control@control:~$ aws ec2 create-key-pair --key-name my-key --query 'KeyMaterial' --output text > my-key.pem
+(myenv) control@control:~$ aws ec2 describe-key-pairs --query "KeyPairs[*].KeyName"
+[
+    "linuxk",
+    "linux",
+    "my-key-name",
+    "windows",
+    "my-key"
+]
+(myenv) control@control:~$
+aws ec2 run-instances \
+    --image-id ami-0c02fb55956c7d316 \
+    --instance-type t2.micro \
+    --key-name my-key \
+    --security-groups my-security-group \
+    --region us-east-1
+
+
+FileNotFoundError: [Errno 2] No such file or directory: '/home/control/tags_update.csv'
+(myenv) control@control:~$ ls
+boto-env       Desktop    Downloads        jenkins-pv.yaml  myenv            my-key.pem  nano       -p        Public  s.sh         tags.py         Templates       -v
+department.py  Documents  jenkins-pvc.yml  Music            my-key-name.pem  --name      --network  Pictures  snap    storage.yml  tag_update.csv  update_tags.py  Videos
+(myenv) control@control:~$ vim department.py
+(myenv) control@control:~$ python department.py
+(myenv) control@control:~$ python department.py
+(myenv) control@control:~$ vim department.py
+(myenv) control@control:~$
+(myenv) control@control:~$ aws ec2 describe-tags --filters "Name=resource-id,Values=i-0b34fa8f05cfe1450"
+{
+    "Tags": []
+}
+(myenv) control@control:~$
+
+(myenv) control@control:~$ aws ec2 create-tags --resources i-0b34fa8f05cfe1450 --tags Key=Hostname,Value=webserver01 Key=Department,Value=Backend
+(myenv) control@control:~$
+
+(myenv) control@control:~$ aws ec2 describe-tags --filters "Name=resource-id,Values=i-0b34fa8f05cfe1450"
+{
+    "Tags": [
+        {
+            "Key": "Department",
+            "ResourceId": "i-0b34fa8f05cfe1450",
+            "ResourceType": "instance",
+            "Value": "Backend"
+        },
+        {
+            "Key": "Hostname",
+            "ResourceId": "i-0b34fa8f05cfe1450",
+            "ResourceType": "instance",
+            "Value": "webserver01"
+        }
+    ]
+}
+(myenv) control@control:~$
+
+(myenv) control@control:~$ aws ec2 create-tags --resources i-06085754d8887a141 --tags Key=Hostname,Value=webserver02 Key=Department,Value=Frontend
+(myenv) control@control:~$
+(myenv) control@control:~$ aws ec2 describe-tags --filters "Name=resource-id,Values=i-06085754d8887a141"
+{
+    "Tags": [
+        {
+            "Key": "Department",
+            "ResourceId": "i-06085754d8887a141",
+            "ResourceType": "instance",
+            "Value": "Frontend"
+        },
+        {
+            "Key": "Hostname",
+            "ResourceId": "i-06085754d8887a141",
+            "ResourceType": "instance",
+            "Value": "webserver02"
+        }
+    ]
+}
+(myenv) control@control:~$
+
+aws ec2 describe-instances \
+  --filters "Name=tag:Hostname,Values=database04" \
+  --query "Reservations[*].Instances[*].InstanceId" \
+  --output text
+
+(myenv) control@control:~$ aws ec2 describe-instances \
+>   --query "Reservations[*].Instances[*].[InstanceId, Tags[?Key=='Hostname'].Value | [0], Tags[?Key=='Department'].Value | [0]]" \
+>   --output table
+----------------------------------------------------
+|                 DescribeInstances                |
++----------------------+---------------+-----------+
+|  i-0b34fa8f05cfe1450 |  webserver01  |  Frontend |
+|  i-06085754d8887a141 |  webserver02  |  Frontend |
++----------------------+---------------+-----------+
+(myenv) control@control:~$
+
+aws ec2 run-instances \
+  --image-id ami-0c02fb55956c7d316 \
+  --instance-type t2.micro \
+  --key-name my-key \
+  --security-groups default \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Hostname,Value=database04},{Key=Department,Value=QA}]' \
+  --count 1
+
+(myenv) control@control:~$ aws ec2 describe-security-groups --query 'SecurityGroups[*].[GroupName,GroupId]' --output table
+
+-------------------------------------------------
+|            DescribeSecurityGroups             |
++----------------------+------------------------+
+|  launch-wizard-20    |  sg-07e94dcc3f0ee1808  |
+|  launch-wizard-25    |  sg-0e33e5d8a94923ec8  |
+|  launch-wizard-17    |  sg-0a61c7ab83fda04cf  |
+|  launch-wizard-21    |  sg-01f1375550a9ef04d  |
+|  launch-wizard-5     |  sg-0d9582bcac7d597c1  |
+|  launch-wizard-24    |  sg-0f5e2114b7933882c  |
+|  launch-wizard-11    |  sg-00672f45e01c0292b  |
+|  launch-wizard-22    |  sg-0fde978df327e0deb  |
+|  default             |  sg-0c0ddef4a702bb518  |
+|  launch-wizard-8     |  sg-07f1a0e9355661d59  |
+|  launch-wizard-9     |  sg-09893f14e535cdc62  |
+|  launch-wizard-10    |  sg-0308e482578528b3f  |
+|  launch-wizard-7     |  sg-0aa417c9e6191ec88  |
+|  launch-wizard-15    |  sg-0571e19403b1eb01a  |
+|  launch-wizard-13    |  sg-071abce30aa0449d6  |
+|  launch-wizard-12    |  sg-0a8289e180e89cb66  |
+|  launch-wizard-4     |  sg-0f3616b7b3de25d5a  |
+|  launch-wizard-18    |  sg-02804b6193c85ab61  |
+|  my-security-group   |  sg-0d5276aa398190ee0  |
+|  launch-wizard-2     |  sg-04c85369f2e2c7566  |
+|  launch-wizard-14    |  sg-08300fb51d349ca87  |
+|  launch-wizard-16    |  sg-08c300d84b1c14791  |
+|  your-security-group |  sg-05744948085c0d155  |
+|  launch-wizard-3     |  sg-05a717816cb21ac48  |
+|  launch-wizard-1     |  sg-0b72092c0443045af  |
+|  launch-wizard-19    |  sg-01c31787073945da7  |
+|  launch-wizard-23    |  sg-07c1b7edd7d845b40  |
+|  launch-wizard-6     |  sg-0086e91937b074a9f  |
++----------------------+------------------------+
+(myenv) control@control:~$
+(myenv) control@control:~$ aws ec2 describe-instances \
+>   --query "Reservations[*].Instances[*].[InstanceId, Tags[?Key=='Hostname'].Value | [0], Tags[?Key=='Department'].Value | [0]]" \
+>   --output table
+
+----------------------------------------------------
+|                 DescribeInstances                |
++----------------------+---------------+-----------+
+|  i-0e584173cbc4ec79c |  database04   |  QA       |
+|  i-0b34fa8f05cfe1450 |  webserver01  |  Frontend |
+|  i-06085754d8887a141 |  webserver02  |  Frontend |
+|  i-09df205103930cedb |  database04   |  QA       |
++----------------------+---------------+-----------+
+(myenv) control@control:~$ python de.py
+
+
+
+CSV Data Loaded:
+            Hostname Current Department New Department
+0        webserver01            Backend       Frontend
+1        webserver02           Frontend       Frontend
+2         database04                 QA        Backend
+3            ansible             Devops        Backend
+4            scanner                NaN         Devops
+5  activedirectory02              ITops          ITops
+6         database03           Frontend        Backend
+7            jenkins                NaN         Devops
+
+Processing instance webserver01 with current department: Backend and new department: Frontend
+No matching instance found for webserver01 with Department Backend
+Processing instance webserver02 with current department: Frontend and new department: Frontend
+Found instance i-06085754d8887a141. Updating department tag...
+Updated instance i-06085754d8887a141 with new Department: Frontend
+Processing instance database04 with current department: QA and new department: Backend
+Found instance i-0e584173cbc4ec79c. Updating department tag...
+Updated instance i-0e584173cbc4ec79c with new Department: Backend
+Found instance i-09df205103930cedb. Updating department tag...
+Updated instance i-09df205103930cedb with new Department: Backend
+Processing instance ansible with current department: Devops and new department: Backend
+No matching instance found for ansible with Department Devops
+Skipping scanner because it has no current department value.
+Processing instance activedirectory02 with current department: ITops and new department: ITops
+No matching instance found for activedirectory02 with Department ITops
+Processing instance database03 with current department: Frontend and new department: Backend
+No matching instance found for database03 with Department Frontend
+Skipping jenkins because it has no current department value.
+(myenv) control@control:~$
+
+
+CSV Data Loaded:
+            Hostname Current Department New Department
+0        webserver01            Backend       Frontend
+1        webserver02           Frontend       Frontend
+2         database04                 QA        Backend
+3            ansible             Devops        Backend
+4            scanner                NaN         Devops
+5  activedirectory02              ITops          ITops
+6         database03           Frontend        Backend
+7            jenkins                NaN         Devops
+
+Processing instance webserver01 with current department: Backend and new department: Frontend
+No matching instance found for webserver01 with Department Backend
+
+Processing instance webserver02 with current department: Frontend and new department: Frontend
+Found instance i-06085754d8887a141. Updating department tag...
+Updated instance i-06085754d8887a141 with new Department: Frontend
+
+Processing instance database04 with current department: QA and new department: Backend
+Found instance i-0e584173cbc4ec79c. Updating department tag...
+Updated instance i-0e584173cbc4ec79c with new Department: Backend
+Found instance i-09df205103930cedb. Updating department tag...
+Updated instance i-09df205103930cedb with new Department: Backend
+
+Processing instance ansible with current department: Devops and new department: Backend
+No matching instance found for ansible with Department Devops
+
+Skipping scanner because it has no current department value.
+
+Processing instance activedirectory02 with current department: ITops and new department: ITops
+No matching instance found for activedirectory02 with Department ITops
+
+Processing instance database03 with current department: Frontend and new department: Backend
+No matching instance found for database03 with Department Frontend
+
+Skipping jenkins because it has no current department value.
+
+
+

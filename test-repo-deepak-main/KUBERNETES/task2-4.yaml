@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: namespace1  # Change this to the appropriate namespace for user1
+  name: user1-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "events"]  # Include events resource here
+  verbs: ["list", "get", "watch"]

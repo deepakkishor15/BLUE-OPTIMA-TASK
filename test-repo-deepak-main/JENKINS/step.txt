@@ -1,0 +1,55 @@
+
+control@control:~$ sudo docker network create jenkins-net
+33633413fd78885725a90e6fcddaf207d5a9d21a181c0f5f458a14c541ac8ba8
+control@control:~$
+
+control@control:~$ sudo docker run -d \
+>   --name jenkins-master \
+>   --network jenkins-net \
+>   -p 8080:8080 -p 50000:50000 \
+>   -v jenkins_home:/var/jenkins_home \
+>   jenkins/jenkins:lts
+Unable to find image 'jenkins/jenkins:lts' locally
+lts: Pulling from jenkins/jenkins
+7cd785773db4: Pull complete
+24f136341396: Pull complete
+Digest: sha256:7aa631e4f036a348a42c3cdf8c31862141ea33605cbf91cb7344c2844e01a6df
+Status: Downloaded newer image for jenkins/jenkins:lts
+ddda39dfcba07f9b0a1c6aef46e49b71e726f7ad584b78fb99437c8111f77a97
+control@control:~$
+
+control@control:~$ sudo docker images
+REPOSITORY        TAG       IMAGE ID       CREATED       SIZE
+jenkins/jenkins   lts       67145d86049c   2 weeks ago   470MB
+control@control:~$
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+26e236de26b4405bb907cc7b2cea1838
+
+This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+2025-04-16 13:46:51.484+0000 [id=32]    INFO    jenkins.InitReactorRunner$1#onAttained: Completed initialization
+2025-04-16 13:46:51.506+0000 [id=23]    INFO    hudson.lifecycle.Lifecycle#onReady: Jenkins is fully up and running
+2025-04-16 13:46:59.776+0000 [id=48]    INFO    h.m.DownloadService$Downloadable#load: Obtained the updated data file for hudson.tasks.Maven.MavenInstaller
+2025-04-16 13:46:59.777+0000 [id=48]    INFO    hudson.util.Retrier#start: Performed the action check updates server successfully at the attempt #1
+
+control@control:~$ sudo docker run -d   --name jenkins-agent-3   --network jenkins-net   -e JENKINS_URL=http://192.168.1.10:8080   -e JENKINS_AGENT_NAME=agent-3   -e JENKINS_SECRET=7c8b5530d9972e3ebf5a3eeb84b944651909be6929652882667007fadfbd43bb   jenkins/inbound-agent
+72a2994c1ba4482242970c7bc26d9d07a8325e8aa4abdcc06c71fe8b6cf8241a
+control@control:~$
+
+control@control:~$ sudo docker run -d   --name jenkins-agent-3   --network jenkins-net   -e JENKINS_URL=http://192.168.1.10:8080   -e JENKINS_AGENT_NAME=agent-3   -e JENKINS_SECRET=7c8b5530d9972e3ebf5a3eeb84b944651909be6929652882667007fadfbd43bb   jenkins/inbound-agent
+72a2994c1ba4482242970c7bc26d9d07a8325e8aa4abdcc06c71fe8b6cf8241a
+control@control:~$ sudo docker run -d   --name jenkins-agent-4   --network jenkins-net   -e JENKINS_URL=http://192.168.1.10:8080   -e JENKINS_AGENT_NAME=agent-4   -e JENKINS_SECRET=74121ede28b56b000d257a20659197c84c3c0f363bca3ef9a18e504717ac798e   jenkins/inbound-agent
+7725db9929dc1a3e696bf2bbd0614d2f8ab25f53573c9003e640514ab51da191
+control@control:~$
+
+
+
+
+

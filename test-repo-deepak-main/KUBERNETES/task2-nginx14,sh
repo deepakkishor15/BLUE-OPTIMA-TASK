@@ -1,0 +1,136 @@
+#!/bin/bash
+
+# Namespaces
+NS1="namespace1"
+NS2="namespace2"
+
+# Step 1: Create namespaces and label them
+for ns in $NS1 $NS2; do
+  echo "Creating namespace: $ns"
+  kubectl create namespace $ns --dry-run=client -o yaml | kubectl apply -f -
+  kubectl label namespace $ns name=$ns --overwrite
+done
+
+# Step 2: Create nginx deployment and service (2 containers per pod)
+DEPLOY_YAML="
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-80
+        image: nginx
+        ports:
+        - containerPort: 80
+      - name: nginx-8080
+        image: nginx
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+    name: http
+  - port: 8080
+    targetPort: 8080
+    name: http-alt
+"
+
+for ns in $NS1 $NS2; do
+  echo "Creating nginx deployment and service in $ns"
+  echo "$DEPLOY_YAML" | kubectl apply -n $ns -f -
+done
+
+# Step 3: Create alpine pod
+ALPINE_POD="
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine-pod
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    command: ['sh', '-c', 'sleep 3600']
+"
+
+for ns in $NS1 $NS2; do
+  echo "Creating alpine pod in $ns"
+  echo "$ALPINE_POD" | kubectl apply -n $ns -f -
+done
+
+# Step 4: Apply NetworkPolicy to restrict port 8080 from other namespaces
+for ns in $NS1 $NS2; do
+  echo "Applying NetworkPolicy in $ns"
+  cat <<EOF | kubectl apply -n $ns -f -
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: restrict-8080-access
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+        - port: 80
+          protocol: TCP
+      from:
+        - namespaceSelector: {}  # Allow port 80 from anywhere
+    - ports:
+        - port: 8080
+          protocol: TCP
+      from:
+        - namespaceSelector:
+            matchLabels:
+              name: $ns  # Allow port 8080 only from same namespace
+EOF
+done
+
+echo -e "\n✅ Setup complete. Run your test script after all pods are ready."
+
+
+output
+===== NAMESPACE CONNECTIVITY TEST =====
+
+🔍 Checking from alpine-pod in namespace1
+----------------------------------------
+Own service (port 80): command terminated with exit code 7
+❌ FAILED
+Own service (port 8080): command terminated with exit code 7
+❌ FAILED
+Other user’s service (port 80): command terminated with exit code 7
+❌ FAILED
+Other user’s service (port 8080 - should be blocked): command terminated with exit code 7
+✅ BLOCKED (Expected)
+
+🔍 Checking from alpine-pod in namespace2
+----------------------------------------
+Own service (port 80): command terminated with exit code 7
+❌ FAILED
+Own service (port 8080): command terminated with exit code 7
+❌ FAILED
+Other user’s service (port 80): command terminated with exit code 7
+❌ FAILED
+Other user’s service (port 8080 - should be blocked): command terminated with exit code 7
+✅ BLOCKED (Expected)
+

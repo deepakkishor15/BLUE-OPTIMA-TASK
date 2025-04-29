@@ -1,0 +1,19 @@
+Please run tast2-13
+===== NAMESPACE CONNECTIVITY TEST =====
+
+🔍 Checking from alpine-pod in namespace1
+----------------------------------------
+Own service (port 80): ✅ SUCCESS
+Own service (port 8080): ✅ SUCCESS
+Other user’s service (port 80): ✅ SUCCESS
+Other user’s service (port 8080 - should be blocked): ❌ UNEXPECTED SUCCESS (Check NetworkPolicy!)
+
+🔍 Checking from alpine-pod in namespace2
+----------------------------------------
+Own service (port 80): ✅ SUCCESS
+Own service (port 8080): ✅ SUCCESS
+Other user’s service (port 80): ✅ SUCCESS
+Other user’s service (port 8080 - should be blocked): ❌ UNEXPECTED SUCCESS (Check NetworkPolicy!)
+
+===== TEST COMPLETE =====
+control@control:~/a$

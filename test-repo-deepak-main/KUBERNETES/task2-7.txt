@@ -1,0 +1,54 @@
+control@control:~/a$ curl http://localhost:8080
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+
+docker exec -it nginx-8080 bash
+echo "Hello, NGINX!" > /usr/share/nginx/html/index.html
+docker restart nginx-8080
+
+
+
+
+control@control:~/a$ sudo lsof -i :8080
+[sudo] password for control:
+COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+docker-pr 47422 root    4u  IPv4 225855      0t0  TCP *:http-alt (LISTEN)
+docker-pr 47429 root    4u  IPv6 225860      0t0  TCP *:http-alt (LISTEN)
+control@control:~/a$ docker exec -it nginx-8080 bash
+root@6c1d572be4cb:/# echo "Hello, NGINX!" > /usr/share/nginx/html/index.html
+root@6c1d572be4cb:/# exit
+exit
+control@control:~/a$ docker restart nginx-8080
+nginx-8080
+control@control:~/a$ Hello, NGINX!
+Hello,: command not found
+control@control:~/a$
+
+
+Task	Status
+Create 2 users + 2 namespaces + RBAC	 Done
+Each user creates deployment with 2 nginx containers	 Done
+Each user creates alpine pod	 Done
+

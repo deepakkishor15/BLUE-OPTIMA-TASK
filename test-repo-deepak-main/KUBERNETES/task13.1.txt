@@ -1,0 +1,10 @@
+task
+
+
+   75  kubectl exec -n namespace1 alpine-pod -- apk add --no-cache curl
+   76  kubectl exec -n namespace2 alpine-pod -- apk add --no-cache curl
+
+      82  kubectl delete deploy nginx-service -n namespace1
+   83  kubectl delete deploy nginx-service -n namespace2
+
+
